@@ -1,7 +1,8 @@
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom";
-import "./styles.css";
+
 const FetchPosts = lazy(() => import("./showPosts"));
+
 
 class App extends React.Component {
   constructor() {
@@ -24,7 +25,7 @@ class App extends React.Component {
           </button>
         </div>
         {this.state.fetchPosts ? (
-          <Suspense delayMs={2000} fallback={<div>Loading......</div>}>
+          <Suspense maxDuration={1500} fallback={<div>Loading......</div>}>
             <FetchPosts />
           </Suspense>
         ) : null}
@@ -34,9 +35,4 @@ class App extends React.Component {
 }
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  rootElement
-);
+ReactDOM.render(<React.StrictMode><App /></React.StrictMode>, rootElement);
